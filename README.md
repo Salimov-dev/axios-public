@@ -1,54 +1,40 @@
-# React + TypeScript + Vite
+Учимся работать с Axios с нуля: отправка запросов, обработка ошибок, создание универсального сервиса, постраничная навигация с сервера   
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+В этом видео мы подробно разберём, как работать с Axios — одним из самых популярных инструментов для отправки HTTP-запросов в JavaScript. Вы научитесь отправлять запросы к API, создавать экземпляры Axios, обрабатывать ошибки и организовывать код с помощью универсального сервиса   
 
-Currently, two official plugins are available:
+Что вы узнаете:   
+- Как отправлять GET, POST, PUT и DELETE запросы на API (на примере Dummyjson.com)   
+- Создание экземпляра Axios для удобной работы с API   
+- Обработка ошибок   
+- Настройка перехватчиков (interceptors)   
+- Создание универсального сервиса для работы с запросами   
+- Создание постраничной навигации с сервера   
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Этот видеоурок подойдёт как для начинающих, так и для тех, кто хочет структурировать свои знания и улучшить навыки работы с Axios.   
 
-## Expanding the ESLint configuration
+Ссылка на видео: https://youtu.be/LKXUiKwWQuA   
+Репа проекта: https://github.com/Salimov-dev/axios-public   
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Мой ТГ: https://t.me/Rogooo   
+Мой канал на youtube: https://www.youtube.com/@salimov-dev   
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+00:00 Вступление   
+01:03 Инициализация проекта   
+01:58 Верстаем проект   
+06:33 Получаем Product с API https://dummyjson.com/   
+10:29 Верстаем карточки с продуктами   
+17:10 Используем Axios   
+18:20 Обрабатываем ошибки в catch   
+22:30 Создание экземпляра axios   
+24:16 Создание отдельного config для axios   
+25:05 Выносим http сервис в отд компонент   
+25:46 Выносим метод обработки ошибок getErrorMessage()   
+26:38 Создаем универсальный сервис для Products   
+29:09 Создаем перехватчик request   
+32:05 Создаем перехватчик response   
+34:35 Создаем постраничная навигацию с API   
+42:14 Конец   
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![превью](https://github.com/user-attachments/assets/d30f50d3-5f47-4019-bf9c-0cfea202caef)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
