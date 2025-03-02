@@ -1,4 +1,4 @@
-import { Card, Col, Flex, Layout, Row, Spin } from "antd";
+import { Card, Col, Flex, Layout, Pagination, Row, Spin } from "antd";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import config from "./config/config.json";
@@ -42,13 +42,19 @@ const layoutStyle = {
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(12);
+  const [total, setTotal] = useState(0);
 
-  const fetchProducts = () => {
+  const fetchProducts = (page: number, limit: number) => {
     setIsLoading(true);
 
     productService
-      .findAll()
-      .then((data) => setProducts(data.products))
+      .findAllPaginated(page, limit)
+      .then((data) => {
+        setProducts(data.products);
+        setTotal(data.total);
+      })
       .catch((error: unknown) => {
         getErrorMessage(error);
       })
@@ -58,8 +64,14 @@ function App() {
   };
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(currentPage, pageSize);
+  }, [currentPage, pageSize]);
+
+  const handlePageChange = (page: number, pageSize: number) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+  };
+
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>Header</Header>
@@ -96,6 +108,16 @@ function App() {
           </Flex>
         )}
       </Content>
+      <Flex justify="center" style={{ marginBottom: "20px" }}>
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={total}
+          onChange={handlePageChange}
+          showSizeChanger
+          showTotal={(total) => `Всего ${total} продуктов`}
+        />
+      </Flex>
       <Footer style={footerStyle}>Footer</Footer>
     </Layout>
   );
